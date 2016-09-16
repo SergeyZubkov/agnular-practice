@@ -1,0 +1,42 @@
+ <div class="row">
+  <div class="col-md-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Код</th>
+          <th ng-click='vm.reverse=!vm.reverse'>
+            <span ng-class="{'glyphicon-chevron-down': !vm.reverse, 'glyphicon-chevron-up': vm.reverse}"
+            class='glyphicon'></span>Курс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='currency in vm.currencies | orderBy : Rate : vm.reverse : vm.myComparator'>
+          <td>{{currency.Name}}</td>
+          <td>{{currency.Rate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-8">
+    <input type="number" min='0' ng-model='vm.amount'>
+    <select ng-model='vm.fromCurrencyName'
+            ng-options="currency.Name for currency in vm.currenciesToConvert">
+    </select>
+    <span class='glyphicon glyphicon-resize-horizontal'></span>
+    <select ng-model='vm.toCurrencyName'
+            ng-options='currency.Name for currency in vm.currenciesToConvert'>
+    </select>
+    <button class="btn btn-default" ng-click='vm.calculate()'>
+      <span class="glyphicon glyphicon-ok-sign"></span>
+      Конвертировать
+    </button>
+    <div class="row">
+      <div class="col-md-8 col-offset-2">
+        <div class="result" ng-show='vm.result'>
+          {{vm.result}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
